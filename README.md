@@ -58,7 +58,7 @@ test2 ansible_connection=podman ansible_python_interpreter=/usr/bin/python3
 Build the hardened Nginx image with Python support (required for Ansible):
 
 ```bash
-podman build -t nginx-secure .
+podman build -t nginx-hardening .
 ```
 
 ## Step 3: Create a Dedicated Network (Optional but Recommended)
@@ -72,8 +72,8 @@ podman network create localnet
 ## Step 4: Launch Containers
 
 ```bash
-podman run -d --name test1 --network localnet nginx-secure
-podman run -d --name test2 --network localnet nginx-secure
+podman run -d --name test1 --network localnet nginx-hardening
+podman run -d --name test2 --network localnet nginx-hardening
 ```
 
 ## Step 5: Apply Security Hardening
@@ -118,7 +118,7 @@ To remove all resources:
 ```bash
 podman stop test1 test2
 podman rm test1 test2
-podman rmi nginx-secure
+podman rmi nginx-hardening
 podman network rm localnet
 ```
 
