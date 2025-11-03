@@ -72,8 +72,8 @@ podman network create localnet
 ## Step 4: Launch Containers
 
 ```bash
-podman run -d --name test1 --network localnet nginx-hardening
-podman run -d --name test2 --network localnet nginx-hardening
+podman run -d --name test1 -p 8080:80 --network localnet nginx-hardening
+podman run -d --name test2 -p 8081:80 --network localnet nginx-hardening
 ```
 
 ## Step 5: Apply Security Hardening
@@ -107,7 +107,7 @@ To confirm the changes:
 
 3. **Test HTTP headers**:
    ```bash
-   curl -I http://$(podman inspect test1 --format '{{.NetworkSettings.IPAddress}}')
+   curl -I http://localhost:8080
    ```
    The `Server` header should show only `nginx` without version number.
 
